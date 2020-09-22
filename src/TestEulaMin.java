@@ -1,16 +1,13 @@
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jsse.provider.BouncyCastleJsseProvider;
-import org.bouncycastle.jsse.util.CustomSSLSocketFactory;
 
 import javax.crypto.Cipher;
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.Socket;
 import java.net.URL;
 import java.security.*;
 import java.security.cert.CertificateException;
-import java.util.Collections;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -27,10 +24,10 @@ class TestEulaMin {
 //        listProtocols();
 //        System.out.println("============= CHECK KEY LENGTH ================");
 //        checkKeyLength();
-//        System.out.println("============= GET EULA ================");
-//        getEula();
-        System.out.println("============= GET EULA ENHANCED ================");
-        getEulaEnhanced();
+        System.out.println("============= GET EULA ================");
+        getEula();
+//        System.out.println("============= GET EULA ENHANCED ================");
+//        getEulaEnhanced();
         System.out.println("============= DONE ================");
     }
 
@@ -77,9 +74,11 @@ class TestEulaMin {
         }
     }
 
+/*
     public static void getEulaEnhanced() {
         try {
-            final URL url = new URL("https://safedoorpm-com.shoutcms.net/tos");
+            //final URL url = new URL("https://safedoorpm-com.shoutcms.net/tos");
+            final URL url = new URL("https://google.com");
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             SSLContext context = SSLContext.getInstance("TLSv1.2", BouncyCastleJsseProvider.PROVIDER_NAME);
 //            final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance("PKIX", BouncyCastleJsseProvider.PROVIDER_NAME);
@@ -142,10 +141,12 @@ class TestEulaMin {
         }
         return null;
     }
+*/
 
     public static void getEula() {
         try {
-            final URL url = new URL("https://safedoorpm-com.shoutcms.net/tos");
+            //final URL url = new URL("https://safedoorpm-com.shoutcms.net/tos");
+            final URL url = new URL("https://google.com");
 
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             SSLContext context = SSLContext.getInstance("TLSv1.2", BouncyCastleJsseProvider.PROVIDER_NAME);
@@ -163,6 +164,7 @@ class TestEulaMin {
     }
 
     private static void parseEulaFromUrl(URL url) {
+        System.out.println("Reading from URL '" + url.toString() + "'.");
         try (InputStream in = url.openStream()) {
             System.out.println("Stream open");
             String eulaContent = new Scanner(in, "UTF-8").useDelimiter("\\A").next();
